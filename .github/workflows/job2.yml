@@ -1,0 +1,28 @@
+name: job2
+on:
+  schedule:
+    - cron: '30 2 * * 2'  # Every Tuesday at 6:45 PM UTC
+  workflow_dispatch:
+
+permissions: 
+  contents: read
+  actions: write
+
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Debug Time
+      run: date
+
+    - name: app
+      run: |
+        chmod +x entrypoint.sh
+
+    - name: app run
+      run: |
+        bash entrypoint.sh
